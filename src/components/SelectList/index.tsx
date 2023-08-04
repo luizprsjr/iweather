@@ -1,8 +1,9 @@
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native'
 
-import { styles } from './styles';
-import { Input } from '@components/Input';
-import { CityProps } from '@services/getCityByNameService';
+import { Input } from '@components/Input'
+import { CityProps } from '@services/getCityByNameService'
+
+import { styles } from './styles'
 
 type Props = {
   isLoading?: boolean;
@@ -23,7 +24,7 @@ export function SelectList(props: Props) {
         value={props.value}
       />
 
-      <View style={styles.options}>
+      <View style={styles.options} testID='options'>
         {
           props.data.map((item) => (
             <TouchableOpacity
