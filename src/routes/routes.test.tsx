@@ -1,5 +1,6 @@
+import { render } from '@__tests__/utils/customRender'
 import { saveStorageCity } from '@libs/asyncStorage/cityStorage'
-import { render, screen, waitFor } from '@testing-library/react-native'
+import { screen, waitFor } from '@testing-library/react-native'
 
 import { Routes } from './'
 
