@@ -14,8 +14,7 @@ import { api } from '@services/api'
 import { Dashboard } from './'
 
 describe('Screen: DashBoard', () => {
-  it('should show stored city weather', async () => {
-    jest.spyOn(api, 'get').mockResolvedValue({ data: mockWeatherAPIResponse })
+  beforeAll(async () => {
     const city = {
       id: '1',
       name: 'Rio de Janeiro, BR',
@@ -23,6 +22,11 @@ describe('Screen: DashBoard', () => {
       longitude: 456
     }
     await saveStorageCity(city)
+  })
+
+  it('should show stored city weather', async () => {
+    jest.spyOn(api, 'get').mockResolvedValue({ data: mockWeatherAPIResponse })
+    
     render(<Dashboard />)
 
     const cityName = await waitFor(() => screen.findByText(/rio de janeiro/i))
@@ -30,14 +34,6 @@ describe('Screen: DashBoard', () => {
   })
 
   it('should change the selected city', async () => {
-    const city = {
-      id: '1',
-      name: 'Rio de Janeiro, BR',
-      latitude: 123,
-      longitude: 456
-    }
-    await saveStorageCity(city)
-
     jest.spyOn(api, 'get')
       .mockResolvedValueOnce({ data: mockWeatherAPIResponse })
       .mockResolvedValueOnce({ data: mockCityAPIResponseWithCityName('Barra do Piraí') })
